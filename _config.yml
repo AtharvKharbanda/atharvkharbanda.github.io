@@ -1,0 +1,5 @@
+title: "Atharv Kharbanda"
+description: "My personal website"
+remote_theme: "mmistakes/minimal-mistakes"
+plugins:
+  - jekyll-include-cache
