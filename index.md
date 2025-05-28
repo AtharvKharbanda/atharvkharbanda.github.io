@@ -21,6 +21,7 @@
     h1 {
       margin: 0;
       font-size: 2.5rem;
+      color: #222;
     }
     .bio {
       margin-top: 1rem;
@@ -47,11 +48,8 @@
   </header>
 
   <main>
-    <p>Hello! I'm Atharv Kharbanda. </p>
-
-    <!-- Add more personalized sections here -->
-    <!-- Example: -->
-    <!-- <section><h2>Projects</h2><ul><li><a href="project1.html">Project 1</a></li></ul></section> -->
+    <p>Hello! I'm Atharv Kharbanda.</p>
+    <p>This is a test paragraph to verify visibility of content.</p>
   </main>
 
   <footer>
