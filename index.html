@@ -12,6 +12,17 @@
     --muted: #62615c;
     --line: #ddd9d0;
     --accent: #1d3557;
+    --tag-bg: #ffffff;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper: #17181a;
+      --ink: #ecebe6;
+      --muted: #9a988f;
+      --line: #33342f;
+      --accent: #7fa7d6;
+      --tag-bg: #1f2022;
+    }
   }
   * { box-sizing: border-box; }
   body {
@@ -24,32 +35,74 @@
   a { color: var(--accent); }
   a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
 
+  .skip-link {
+    position: absolute;
+    left: -999px;
+    top: 0;
+    background: var(--accent);
+    color: var(--paper);
+    padding: 0.5rem 1rem;
+    z-index: 10;
+  }
+  .skip-link:focus { left: 1rem; top: 1rem; }
+
   .wrap {
     max-width: 720px;
     margin: 0 auto;
-    padding: 4rem 1.5rem 3rem;
+    padding: 3.5rem 1.5rem 3rem;
   }
 
   nav {
     display: flex;
-    gap: 1.5rem;
+    justify-content: space-between;
+    align-items: center;
     font-size: 0.95rem;
     margin-bottom: 3.5rem;
   }
+  nav .links { display: flex; gap: 1.5rem; }
   nav a { text-decoration: none; color: var(--muted); }
   nav a:hover { color: var(--ink); }
+  nav .initials {
+    font-family: Georgia, "Iowan Old Style", serif;
+    font-size: 1.05rem;
+    color: var(--ink);
+    text-decoration: none;
+    border: 1px solid var(--line);
+    border-radius: 50%;
+    width: 2.1rem;
+    height: 2.1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 
   header h1 {
     font-family: Georgia, "Iowan Old Style", serif;
     font-size: 2.75rem;
     line-height: 1.15;
-    margin: 0 0 0.5rem;
+    margin: 0 0 0.6rem;
     letter-spacing: -0.01em;
   }
   header p.role {
     font-size: 1.15rem;
     color: var(--muted);
-    margin: 0 0 2rem;
+    margin: 0 0 1rem;
+    max-width: 46ch;
+  }
+  header .status {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.88rem;
+    color: var(--muted);
+    margin-bottom: 1.5rem;
+  }
+  header .status .dot {
+    width: 0.45rem;
+    height: 0.45rem;
+    border-radius: 50%;
+    background: #4a9d5f;
+    flex-shrink: 0;
   }
 
   section { margin-top: 3.5rem; }
@@ -65,20 +118,49 @@
   .bio p { max-width: 62ch; }
 
   .project {
-    padding: 1.1rem 0;
+    padding: 1.2rem 0;
     border-bottom: 1px solid var(--line);
   }
   .project:last-child { border-bottom: none; }
+  .project-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
   .project h3 {
-    margin: 0 0 0.25rem;
+    margin: 0 0 0.3rem;
     font-size: 1.05rem;
   }
   .project h3 a { text-decoration: none; }
   .project h3 a:hover { text-decoration: underline; }
+  .project time {
+    font-size: 0.82rem;
+    color: var(--muted);
+    white-space: nowrap;
+  }
   .project p {
-    margin: 0;
+    margin: 0.15rem 0 0.6rem;
     color: var(--muted);
     font-size: 0.97rem;
+    max-width: 56ch;
+  }
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+  .tags li {
+    font-size: 0.78rem;
+    color: var(--muted);
+    background: var(--tag-bg);
+    border: 1px solid var(--line);
+    padding: 0.15rem 0.55rem;
+    border-radius: 3px;
   }
 
   .skills {
@@ -97,6 +179,13 @@
     border-radius: 3px;
   }
 
+  .now {
+    font-size: 0.97rem;
+    color: var(--muted);
+    max-width: 60ch;
+  }
+  .now strong { color: var(--ink); font-weight: 600; }
+
   .contact-links {
     display: flex;
     flex-wrap: wrap;
@@ -111,81 +200,116 @@
     border-top: 1px solid var(--line);
     font-size: 0.85rem;
     color: var(--muted);
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.5rem;
   }
 
   @media (max-width: 480px) {
     .wrap { padding: 2.5rem 1.25rem 2.5rem; }
     header h1 { font-size: 2.1rem; }
+    nav .links { gap: 1rem; }
   }
 </style>
 </head>
 <body>
+<a class="skip-link" href="#main">Skip to content</a>
 <div class="wrap">
 
   <nav>
-    <a href="#about">About</a>
-    <a href="#work">Work</a>
-    <a href="#skills">Skills</a>
-    <a href="#contact">Contact</a>
+    <a class="initials" href="#top">AK</a>
+    <div class="links">
+      <a href="#about">About</a>
+      <a href="#work">Work</a>
+      <a href="#skills">Skills</a>
+      <a href="#contact">Contact</a>
+    </div>
   </nav>
 
-  <header>
+  <header id="top">
     <h1>Atharv Kharbanda</h1>
-    <p class="role"><!-- Replace with your actual role/focus, e.g. "Software engineer building developer tools." -->Building things at the intersection of software and ideas.</p>
+    <p class="role"><!-- Replace with your actual role/focus --> Building things at the intersection of software and ideas.</p>
+    <div class="status"><span class="dot"></span><!-- Replace or remove this line -->Open to new projects and conversations</div>
   </header>
 
-  <section id="about" class="bio">
-    <h2>About</h2>
-    <p>
-      <!-- Replace with a couple of real sentences about your background, interests, and what you're currently focused on. -->
-      I'm Atharv — this is where I share what I'm working on, things I've built, and how to reach me. I'm currently exploring new ideas and always open to interesting conversations and collaborations.
-    </p>
-  </section>
+  <main id="main">
 
-  <section id="work">
-    <h2>Selected work</h2>
+    <section id="about" class="bio">
+      <h2>About</h2>
+      <p>
+        <!-- Replace with real bio -->
+        I'm Atharv — this is where I share what I'm working on, things I've built, and how to reach me. I'm currently exploring new ideas and always open to interesting conversations and collaborations.
+      </p>
+    </section>
 
-    <div class="project">
-      <h3><a href="#">Project One</a></h3>
-      <p>One line on what it is, what problem it solves, and the stack you used.</p>
-    </div>
+    <section id="work">
+      <h2>Selected work</h2>
 
-    <div class="project">
-      <h3><a href="#">Project Two</a></h3>
-      <p>One line on what it is, what problem it solves, and the stack you used.</p>
-    </div>
+      <div class="project">
+        <div class="project-head">
+          <h3><a href="#">Project One</a></h3>
+          <time>2025</time>
+        </div>
+        <p>One line on what it is and the problem it solves.</p>
+        <ul class="tags"><li>Python</li><li>React</li></ul>
+      </div>
 
-    <div class="project">
-      <h3><a href="#">Project Three</a></h3>
-      <p>One line on what it is, what problem it solves, and the stack you used.</p>
-    </div>
-  </section>
+      <div class="project">
+        <div class="project-head">
+          <h3><a href="#">Project Two</a></h3>
+          <time>2024</time>
+        </div>
+        <p>One line on what it is and the problem it solves.</p>
+        <ul class="tags"><li>JavaScript</li><li>Node</li></ul>
+      </div>
 
-  <section id="skills">
-    <h2>Skills</h2>
-    <ul class="skills">
-      <li>Python</li>
-      <li>JavaScript</li>
-      <li>React</li>
-      <li>SQL</li>
-      <li>Git</li>
-    </ul>
-  </section>
+      <div class="project">
+        <div class="project-head">
+          <h3><a href="#">Project Three</a></h3>
+          <time>2024</time>
+        </div>
+        <p>One line on what it is and the problem it solves.</p>
+        <ul class="tags"><li>SQL</li><li>Data</li></ul>
+      </div>
+    </section>
 
-  <section id="contact">
-    <h2>Contact</h2>
-    <div class="contact-links">
-      <a href="mailto:you@example.com">Email</a>
-      <a href="https://github.com/">GitHub</a>
-      <a href="https://linkedin.com/">LinkedIn</a>
-      <a href="https://twitter.com/">Twitter</a>
-    </div>
-  </section>
+    <section id="skills">
+      <h2>Skills</h2>
+      <ul class="skills">
+        <li>Python</li>
+        <li>JavaScript</li>
+        <li>React</li>
+        <li>SQL</li>
+        <li>Git</li>
+      </ul>
+    </section>
+
+    <section id="now">
+      <h2>Now</h2>
+      <p class="now"><!-- A short line on what you're currently doing — updates the site without a full rewrite --><strong>Currently:</strong> learning, building, and figuring out what's next.</p>
+    </section>
+
+    <section id="contact">
+      <h2>Contact</h2>
+      <div class="contact-links">
+        <a href="mailto:you@example.com">Email</a>
+        <a href="https://github.com/">GitHub</a>
+        <a href="https://linkedin.com/">LinkedIn</a>
+        <a href="https://twitter.com/">Twitter</a>
+      </div>
+    </section>
+
+  </main>
 
   <footer>
-    &copy; 2025 Atharv Kharbanda.
+    <span>&copy; <span id="year">2025</span> Atharv Kharbanda.</span>
+    <a href="#top">Back to top</a>
   </footer>
 
 </div>
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
 </body>
 </html>
